@@ -10,9 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    utils/utils.cpp \
+    video/videoplayer.cpp \
     views/mainwindow.cpp
 
 HEADERS += \
+    utils/utils.h \
+    video/videoplayer.h \
     views/mainwindow.h
 
 FORMS += \
@@ -25,3 +29,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources/res.qrc
+
+DISTFILES += \
+    pyplugin/plugin_main.py
