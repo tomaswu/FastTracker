@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,15 +12,22 @@ SOURCES += \
     main.cpp \
     utils/utils.cpp \
     video/videoplayer.cpp \
-    views/mainwindow.cpp
+    views/mainwindow.cpp \
+    views/tabform.cpp \
+    views/tchartview.cpp \
+    views/tchartwindow.cpp
 
 HEADERS += \
     utils/utils.h \
     video/videoplayer.h \
-    views/mainwindow.h
+    views/mainwindow.h \
+    views/tabform.h \
+    views/tchartview.h \
+    views/tchartwindow.h
 
 FORMS += \
-    views/mainwindow.ui
+    views/mainwindow.ui \
+    views/tabform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
