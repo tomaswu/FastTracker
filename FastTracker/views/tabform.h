@@ -1,8 +1,8 @@
-#ifndef TABFORM_H
+﻿#ifndef TABFORM_H
 #define TABFORM_H
 
 #include <QWidget>
-#include "tomasvideoReader.h"
+#include "video/videoplayer.h"
 
 namespace Ui {
 class TabForm;
@@ -16,7 +16,7 @@ public:
     explicit TabForm(QWidget *parent = nullptr);
     ~TabForm();
 
-    TomasVideoReader            *videoPlayer;
+    VideoPlayer             *videoPlayer;
 
 
 private:

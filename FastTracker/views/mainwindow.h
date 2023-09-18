@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -27,6 +27,7 @@ private:
     void                    initconnect();
     void                    import_video();
     void                    new_tag();
+    void                    setCurrentTabIndex();
 
 };
 #endif // MAINWINDOW_H

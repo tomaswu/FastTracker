@@ -3,6 +3,7 @@ QT       += core gui charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
+CONFIG += debug_and_release
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -32,8 +33,22 @@ FORMS += \
     views/tabform.ui
 
 windows{
+    INCLUDEPATH += E:\Tomas_temp\opencv\opencv480\opencv\build\include \
+                   C:\embedded_python\include \
+                   E:\boost_1_81_0\boost_1_81_0
 
 
+LIBS += -LE:\boost_1_81_0\boost_1_81_0\bin.v2\libs\python\build\msvc-14.3\release\link-static\python-3.11\threading-multi \
+        -LE:\boost_1_81_0\boost_1_81_0\bin.v2\libs\python\build\msvc-14.3\debug\link-static\python-3.11\threading-multi \
+        -LE:\Tomas_temp\opencv\opencv480\opencv\build\x64\vc16\lib \
+        -LC:\embedded_python\libs
+
+    CONFIG(debug,debug|release){
+        LIBS += -lopencv_world480d -lpython311 -llibboost_python311-vc143-mt-gd-x64-1_81 -llibboost_numpy311-vc143-mt-gd-x64-1_81
+    }
+    CONFIG(release,debug|release){
+        LIBS += -lopencv_world480 -lpython311 -lboost_python311-vc143-mt-x64-1_81 -lboost_numpy311-vc143-mt-x64-1_81
+    }
 }
 
 macx{
@@ -66,10 +81,3 @@ else:unix: LIBS += -L$$OUT_PWD/../TomasCommandLineTools/ -lTomasCommandLineTools
 
 INCLUDEPATH += $$PWD/../TomasCommandLineTools
 DEPENDPATH += $$PWD/../TomasCommandLineTools
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../TomasVideoReader/release/ -lTomasVideoReader
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../TomasVideoReader/debug/ -lTomasVideoReader
-else:unix: LIBS += -L$$OUT_PWD/../TomasVideoReader/ -lTomasVideoReader
-
-INCLUDEPATH += $$PWD/../TomasVideoReader
-DEPENDPATH += $$PWD/../TomasVideoReader
