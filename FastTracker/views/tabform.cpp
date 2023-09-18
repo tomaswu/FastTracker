@@ -6,6 +6,7 @@ TabForm::TabForm(QWidget *parent) :
     ui(new Ui::TabForm)
 {
     ui->setupUi(this);
+    videoPlayer = new TomasVideoReader;
 }
 
 TabForm::~TabForm()

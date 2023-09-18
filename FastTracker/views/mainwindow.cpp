@@ -15,6 +15,25 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::initconnect(){
+    connect(ui->actionImport_Video,&QAction::triggered,this,&MainWindow::import_video);
+
+}
+
+
+void MainWindow::import_video(){
+    if(tabList.size()>0){
+    }
+    tabList[currentTabIndex]->videoPlayer->open();
+
 
 
 }
+
+void MainWindow::new_tag()
+{
+    auto tmp = new TabForm();
+    this->tabList.append(tmp);
+    ui->tabWidget->addTab(tmp);
+
+}
+

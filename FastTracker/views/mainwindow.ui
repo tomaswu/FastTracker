@@ -20,7 +20,11 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="TabForm" name="widget" native="true"/>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -655,14 +659,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TabForm</class>
-   <extends>QWidget</extends>
-   <header>views/tabform.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../resources/res.qrc"/>
  </resources>

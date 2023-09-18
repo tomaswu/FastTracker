@@ -7,6 +7,7 @@
 #include <opencv2/calib3d.hpp>
 #include <string>
 #include <fstream>
+#include <QFileDialog>>
 
 TomasVideoReader::TomasVideoReader(QObject *parent)
     : QObject{parent}
@@ -29,6 +30,11 @@ TomasVideoReader::~TomasVideoReader(){
 }
 
 void TomasVideoReader::open(QString path){
+    if(path==""){
+        path = QFileDialog::getOpenFileName(nullptr,tr("import video"),"./","*.avi|*.mp4");
+        if(path.size()==0)return;
+    }
+
     if(play_timer->isActive())
     {
         play_timer->stop();

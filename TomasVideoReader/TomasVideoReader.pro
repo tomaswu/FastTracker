@@ -1,4 +1,4 @@
-QT += core quick
+QT += core quick widgets
 
 TEMPLATE = lib
 DEFINES += TOMASVIDEOREADER_LIBRARY

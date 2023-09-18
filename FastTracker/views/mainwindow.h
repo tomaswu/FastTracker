@@ -20,15 +20,13 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    // member
-    HistoryManager          historyManager;
-
     QList<TabForm *>        tabList;                //save the tab widget pointer
     int                     currentTabIndex{-1};
 
-
     //method
     void                    initconnect();
+    void                    import_video();
+    void                    new_tag();
 
 };
 #endif // MAINWINDOW_H
