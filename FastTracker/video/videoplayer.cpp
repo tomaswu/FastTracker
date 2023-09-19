@@ -23,6 +23,7 @@ void VideoPlayer::open(QString path)
         path = QFileDialog::getOpenFileName(nullptr,tr("open video"),"./","*.mp4;*.avi");
     }
     this->_video->open(path.toStdString());
+    emit getFramesCount(frameCount());
     if(_video->isOpened())readFrame();
 }
 

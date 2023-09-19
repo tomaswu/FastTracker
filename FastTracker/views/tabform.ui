@@ -77,19 +77,19 @@
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="back">
+          <widget class="QToolButton" name="toolButton_back">
            <property name="text">
             <string>back</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton_7">
+          <widget class="QToolButton" name="toolButton_currentPos">
            <property name="toolTip">
             <string>step</string>
            </property>
            <property name="text">
-            <string>1</string>
+            <string>0</string>
            </property>
           </widget>
          </item>

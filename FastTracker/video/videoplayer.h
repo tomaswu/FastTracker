@@ -33,6 +33,7 @@ public:
 
 signals:
     void imgReady(cv::Mat img);
+    void getFramesCount(int v);
     void errorOccured(QString err);
 
 private:

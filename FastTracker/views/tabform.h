@@ -24,13 +24,14 @@ public:
 
     //method
     void                    showFrame(cv::Mat mat);
-
+    void                    setZoomRatio();
+    void                    setMaxFrameValue(int value);
+    void                    setVideoPos(int v=0);
 
 private:
     Ui::TabForm *ui;
     QGraphicsScene *scene;
     QGraphicsPixmapItem *imgItem;
-
     void initConnections();
 
 };

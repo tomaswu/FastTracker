@@ -27,6 +27,9 @@ void MainWindow::initconnect(){
 
 
 void MainWindow::import_video(){
+    if(tabList.size()==0){
+        new_tag();
+    }
     if(tabList.size()>0){
         tabList[currentTabIndex]->videoPlayer->open();
     }
