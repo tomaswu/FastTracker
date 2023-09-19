@@ -13,8 +13,6 @@
 
 #include <QMetaType>
 
-int _r = qRegisterMetaType<cv::Mat>("cv::Mat");
-
 class VideoPlayer : public QObject
 {
     Q_OBJECT
@@ -23,10 +21,11 @@ public:
     ~VideoPlayer();
     void        open(QString path="");
     void        close();
+    void        readFrame();
     int         pos();
-    cv::Mat     backward();
-    cv::Mat     next();
-    void        setPos(int pos);
+    void        backward();
+    void        next();
+    void        setPos(int p);
     bool        isOpened();
     int         frameCount();
     double      fps();
@@ -34,12 +33,14 @@ public:
 
 signals:
     void imgReady(cv::Mat img);
+    void errorOccured(QString err);
 
 private:
     //member
-    cv::VideoCapture    *_video;
+    cv::VideoCapture    *_video{nullptr};
     double              _fps{0};
     QSize               _imgSize{0,0};
+    cv::Mat             _mat;
     //method
 
 };
