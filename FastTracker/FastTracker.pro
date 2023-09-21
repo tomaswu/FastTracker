@@ -11,7 +11,9 @@ CONFIG += debug_and_release
 
 SOURCES += \
     main.cpp \
+    mtypes.cpp \
     utils/historymanager.cpp \
+    utils/mtypes.cpp \
     utils/utils.cpp \
     video/videoplayer.cpp \
     views/mainwindow.cpp \
@@ -21,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     utils/historymanager.h \
+    utils/mtypes.h \
     utils/utils.h \
     video/videoplayer.h \
     views/mainwindow.h \

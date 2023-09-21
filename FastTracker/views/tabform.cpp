@@ -1,8 +1,10 @@
 ﻿#include "tabform.h"
 #include "ui_tabform.h"
 #include "utils/utils.h"
-
 #include <QDebug>
+#include <QMouseEvent>
+#include <QCursor>
+#include <QActionGroup>
 
 #define qdb qDebug()
 
@@ -17,6 +19,9 @@ TabForm::TabForm(QWidget *parent) :
     imgItem = new QGraphicsPixmapItem();
     scene->addItem(imgItem);
     initConnections();
+
+    //frame menu init
+    _createFrameMenu();
 }
 
 TabForm::~TabForm()
@@ -69,3 +74,63 @@ void TabForm::initConnections()
     connect(videoPlayer,&VideoPlayer::getFramesCount,this,&TabForm::setMaxFrameValue);
     connect(ui->horizontalSlider,&QSlider::valueChanged,this,&TabForm::setVideoPos);
 }
+
+void TabForm::_createFrameMenu()
+{
+    QActionGroup *gp = new QActionGroup(this);
+    QMenu *tmpMenu = new QMenu();
+    tmpMenu->setTitle("显示");
+
+    QAction *ac = new QAction();
+    ac->setText("帧");
+    ac->setCheckable(true);
+    tmpMenu->addAction(ac);
+    gp->addAction(ac);
+    ac->setChecked(true);
+
+    ac = new QAction();
+    ac->setText("时间");
+    ac->setCheckable(true);
+    tmpMenu->addAction(ac);
+    gp->addAction(ac);
+
+    ac = new QAction();
+    ac->setText("步骤");
+    ac->setCheckable(true);
+    tmpMenu->addAction(ac);
+    gp->addAction(ac);
+
+    _frameMenu.addMenu(tmpMenu);
+    gp->setExclusive(true);
+
+    ac = new QAction();
+    ac->setText("当前时间设置为0");
+    _frameMenu.addAction(ac);
+
+    ac = new QAction();
+    ac->setText("设置时间");
+    _frameMenu.addAction(ac);
+
+    ac = new QAction();
+    ac->setText("跳转");
+    _frameMenu.addAction(ac);
+
+    connect(ui->toolButton_frame,&QToolButton::clicked,this,[=](){_frameMenu.popup(QCursor::pos());});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

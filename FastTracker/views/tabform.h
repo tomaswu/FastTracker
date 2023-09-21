@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
-
+#include <QMenu>
 #include "video/videoplayer.h"
 
 namespace Ui {
@@ -28,11 +28,18 @@ public:
     void                    setMaxFrameValue(int value);
     void                    setVideoPos(int v=0);
 
+    void                    video_goto();
+
 private:
-    Ui::TabForm *ui;
-    QGraphicsScene *scene;
-    QGraphicsPixmapItem *imgItem;
-    void initConnections();
+    Ui::TabForm                         *ui;
+    QGraphicsScene                      *scene;
+    QGraphicsPixmapItem                 *imgItem;
+    void                                initConnections();
+
+    QMenu                               _frameMenu; //左下角的帧按钮显示菜单
+    void                                _createFrameMenu(); //初始化左下角帧按钮显示菜单
+
+
 
 };
 
