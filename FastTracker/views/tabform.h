@@ -6,6 +6,7 @@
 #include <QGraphicsPixmapItem>
 #include <QMenu>
 #include "video/videoplayer.h"
+#include "utils/mtypes.h"
 
 namespace Ui {
 class TabForm;
@@ -36,8 +37,10 @@ private:
     QGraphicsPixmapItem                 *imgItem;
     void                                initConnections();
 
+    VideoPos                            _pos;
     QMenu                               _frameMenu; //左下角的帧按钮显示菜单
     void                                _createFrameMenu(); //初始化左下角帧按钮显示菜单
+
 
 
 

@@ -1,4 +1,4 @@
-#ifndef MTYPES_H
+﻿#ifndef MTYPES_H
 #define MTYPES_H
 
 class VideoPos
@@ -15,6 +15,7 @@ public:
     void setIntervalStep(int step);
     void setZeroFrame(int frame);
     void setFps(double fps);
+    void setCurrentFrame2ZeroTime();
 
 private:
     int         _frame{0};
