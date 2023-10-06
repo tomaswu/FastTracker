@@ -1,5 +1,8 @@
 ﻿#include "utils/mtypes.h"
 
+namespace mtypes {
+
+
 
 int VideoPos::frame()
 {
@@ -16,9 +19,38 @@ int VideoPos::step()
     return _step;
 }
 
+double VideoPos::getTypePos()
+{
+    switch (_pos_type) {
+    case POS_TYPE::frame:
+        return this->frame();
+        break;
+    case POS_TYPE::time:
+        return this->time();
+        break;
+    case POS_TYPE::step:
+        return this->step();
+        break;
+    default:
+        return 0;
+        break;
+    }
+}
+
+POS_TYPE VideoPos::posType()
+{
+    return _pos_type;
+}
+
+int VideoPos::maxFrame()
+{
+    return _maxFrame;
+}
+
 void VideoPos::setFrame(int frame)
 {
     if(frame<0)frame=0;
+    if(frame>_maxFrame)frame=_maxFrame;
     int df = frame-_frame;
     _frame=frame;
     _time+=df/_fps;
@@ -64,4 +96,22 @@ void VideoPos::setCurrentFrame2ZeroTime()
 {
     _time=0;
     _zeroFrame=_frame;
+}
+
+void VideoPos::setPosType(POS_TYPE pt)
+{
+    _pos_type=pt;
+}
+
+void VideoPos::setMaxFrame(int mf)
+{
+    this->_maxFrame=mf;
+}
+
+void VideoPos::setInfo(int mf, double fps)
+{
+    this->setMaxFrame(mf);
+    this->setFps(fps);
+}
+
 }

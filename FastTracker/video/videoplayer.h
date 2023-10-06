@@ -33,7 +33,7 @@ public:
 
 signals:
     void imgReady(cv::Mat img);
-    void getFramesCount(int v);
+    void getVideoInfo(int maxFrame,double fps);
     void errorOccured(QString err);
 
 private:

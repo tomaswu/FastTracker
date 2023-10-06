@@ -24,24 +24,21 @@ public:
 
 
     //method
-    void                    showFrame(cv::Mat mat);
-    void                    setZoomRatio();
-    void                    setMaxFrameValue(int value);
-    void                    setVideoPos(int v=0);
-
-    void                    video_goto();
+    void                    showFrame(cv::Mat mat);                 //显示画面到窗口
+    void                    setZoomRatio();                         //设置画面放大比例
+    void                    setVideoPos(int v=0);                   //设置视频的帧位置
+    void                    video_goto(mtypes::VideoPos *pos);      //跳转视频到指定位置
 
 private:
-    Ui::TabForm                         *ui;
-    QGraphicsScene                      *scene;
-    QGraphicsPixmapItem                 *imgItem;
-    void                                initConnections();
-
-    VideoPos                            _pos;
-    QMenu                               _frameMenu; //左下角的帧按钮显示菜单
-    void                                _createFrameMenu(); //初始化左下角帧按钮显示菜单
-
-
+    Ui::TabForm                         *ui;                        // designer ui
+    QGraphicsScene                      *scene;                     //场景
+    QGraphicsPixmapItem                 *imgItem;                   //画面
+    void                                initConnections();          //创建绝大部分信号连接
+    mtypes::VideoPos                     _pos;                       //当前视频所在位置
+    QMenu                               _frameMenu;                 //左下角的帧按钮显示菜单
+    void                                _createFrameMenu();         //初始化左下角帧按钮显示菜单
+    void                                _showCurrentPos();          //更新到当前视频位置
+    void                                _setPosTime();              //设置位置时间
 
 
 };

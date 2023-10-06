@@ -11,11 +11,11 @@ CONFIG += debug_and_release
 
 SOURCES += \
     main.cpp \
-    mtypes.cpp \
     utils/historymanager.cpp \
     utils/mtypes.cpp \
     utils/utils.cpp \
     video/videoplayer.cpp \
+    views/dialogvideogoto.cpp \
     views/mainwindow.cpp \
     views/tabform.cpp \
     views/tchartview.cpp \
@@ -26,12 +26,14 @@ HEADERS += \
     utils/mtypes.h \
     utils/utils.h \
     video/videoplayer.h \
+    views/dialogvideogoto.h \
     views/mainwindow.h \
     views/tabform.h \
     views/tchartview.h \
     views/tchartwindow.h
 
 FORMS += \
+    views/dialogvideogoto.ui \
     views/mainwindow.ui \
     views/tabform.ui
 

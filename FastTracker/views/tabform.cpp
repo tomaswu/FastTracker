@@ -5,6 +5,8 @@
 #include <QMouseEvent>
 #include <QCursor>
 #include <QActionGroup>
+#include <QMessageBox>
+#include <QInputDialog>
 
 #define qdb qDebug()
 
@@ -20,8 +22,6 @@ TabForm::TabForm(QWidget *parent) :
     scene->addItem(imgItem);
     initConnections();
 
-    //frame menu init
-    _createFrameMenu();
 }
 
 TabForm::~TabForm()
@@ -42,12 +42,6 @@ void TabForm::setZoomRatio()
     qdb<<"set zoom:"<<v;
 }
 
-void TabForm::setMaxFrameValue(int value)
-{
-    ui->horizontalSlider->setMaximum(value);
-    ui->toolButton_frame->setText(QString::number(value));
-}
-
 void TabForm::setVideoPos(int v)
 {
     auto obj = sender()->objectName();
@@ -62,7 +56,16 @@ void TabForm::setVideoPos(int v)
         videoPlayer->next();
         ui->horizontalSlider->setValue(videoPlayer->pos());
     }
-    ui->toolButton_currentPos->setText(QString::number(videoPlayer->pos()));
+
+    // ***show pos***
+   int fpos = videoPlayer->pos();
+   _pos.setFrame(fpos);
+   _showCurrentPos();
+}
+
+void TabForm::video_goto(mtypes::VideoPos *pos)
+{
+    this->setVideoPos(pos->frame());
 }
 
 void TabForm::initConnections()
@@ -71,8 +74,13 @@ void TabForm::initConnections()
     connect(ui->spinBox_zoom,&QSpinBox::valueChanged,this,&TabForm::setZoomRatio);
     connect(ui->toolButton_next,&QToolButton::clicked,this,&TabForm::setVideoPos);
     connect(ui->toolButton_back,&QToolButton::clicked,this,&TabForm::setVideoPos);
-    connect(videoPlayer,&VideoPlayer::getFramesCount,this,&TabForm::setMaxFrameValue);
-    connect(ui->horizontalSlider,&QSlider::valueChanged,this,&TabForm::setVideoPos);
+    connect(videoPlayer,&VideoPlayer::getVideoInfo,this,[=](int mf,double fps){this->_pos.setInfo(mf,fps);
+                                                            ui->horizontalSlider->setMaximum(mf);});
+    connect(ui->horizontalSlider,&QSlider::sliderMoved,this,&TabForm::setVideoPos);
+
+    //frame menu init
+    _createFrameMenu();
+
 }
 
 void TabForm::_createFrameMenu()
@@ -87,18 +95,21 @@ void TabForm::_createFrameMenu()
     tmpMenu->addAction(ac);
     gp->addAction(ac);
     ac->setChecked(true);
+    connect(ac,&QAction::triggered,this,[=](){this->_pos.setPosType(mtypes::POS_TYPE::frame);});
 
     ac = new QAction();
     ac->setText("时间");
     ac->setCheckable(true);
     tmpMenu->addAction(ac);
     gp->addAction(ac);
+    connect(ac,&QAction::triggered,this,[=](){this->_pos.setPosType(mtypes::POS_TYPE::time);});
 
     ac = new QAction();
     ac->setText("步骤");
     ac->setCheckable(true);
     tmpMenu->addAction(ac);
     gp->addAction(ac);
+    connect(ac,&QAction::triggered,this,[=](){this->_pos.setPosType(mtypes::POS_TYPE::step);});
 
     _frameMenu.addMenu(tmpMenu);
     gp->setExclusive(true);
@@ -106,16 +117,39 @@ void TabForm::_createFrameMenu()
     ac = new QAction();
     ac->setText("当前时间设置为0");
     _frameMenu.addAction(ac);
+    connect(ac,&QAction::triggered,this,[=](){this->_pos.setCurrentFrame2ZeroTime();this->_showCurrentPos();});
 
     ac = new QAction();
     ac->setText("设置时间");
     _frameMenu.addAction(ac);
+    connect(ac,&QAction::triggered,this,[=](){this->_setPosTime();});
 
     ac = new QAction();
     ac->setText("跳转");
     _frameMenu.addAction(ac);
 
-    connect(ui->toolButton_frame,&QToolButton::clicked,this,[=](){_frameMenu.popup(QCursor::pos());});
+    connect(ui->toolButton_pos,&QToolButton::clicked,this,[=](){_frameMenu.popup(QCursor::pos());});
+}
+
+void TabForm::_showCurrentPos()
+{
+    QString s;
+    if(_pos.posType()!=mtypes::POS_TYPE::time){
+        s=QString::number(_pos.getTypePos(),'f',0);
+    }
+    else{
+        s=QString::number(_pos.getTypePos(),'f',3);
+    }
+    ui->toolButton_pos->setText(s);
+}
+
+void TabForm::_setPosTime()
+{
+    bool ok{false};
+    auto d = QInputDialog::getDouble(this,tr("input time"),tr("input a value (s) as current time:"),0,-99999999,99999999,3,&ok);
+    if(ok){
+        _pos.setTime(d);
+    }
 }
 
 

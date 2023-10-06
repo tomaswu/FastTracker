@@ -27,7 +27,13 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QToolButton" name="toolButton_frame">
+          <widget class="QToolButton" name="toolButton_pos">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>000</string>
            </property>
