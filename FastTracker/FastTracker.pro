@@ -38,15 +38,15 @@ FORMS += \
     views/tabform.ui
 
 windows{
-    INCLUDEPATH += E:\Tomas_temp\opencv\opencv480\opencv\build\include \
-                   C:\embedded_python\include \
-                   E:\boost_1_81_0\boost_1_81_0
+    INCLUDEPATH += D:\data\third_libs\opencv\opencv480\opencv\build\include \
+                   C:\Users\tomas\miniconda3\envs\py311\include \
+                   D:\data\third_libs\boost_1_81_0\boost_1_81_0
 
 
-LIBS += -LE:\boost_1_81_0\boost_1_81_0\bin.v2\libs\python\build\msvc-14.3\release\link-static\python-3.11\threading-multi \
-        -LE:\boost_1_81_0\boost_1_81_0\bin.v2\libs\python\build\msvc-14.3\debug\link-static\python-3.11\threading-multi \
-        -LE:\Tomas_temp\opencv\opencv480\opencv\build\x64\vc16\lib \
-        -LC:\embedded_python\libs
+LIBS += -LD:\data\third_libs\boost_1_81_0\boost_1_81_0\bin.v2\libs\python\build\msvc-14.3\release\link-static\python-3.11\threading-multi \
+        -LD:\data\third_libs\boost_1_81_0\boost_1_81_0\bin.v2\libs\python\build\msvc-14.3\debug\link-static\python-3.11\threading-multi \
+        -LD:\data\third_libs\opencv\opencv480\opencv\build\x64\vc16\lib \
+        -LC:\Users\tomas\miniconda3\envs\py311\libs
 
     CONFIG(debug,debug|release){
         LIBS += -lopencv_world480d -lpython311 -llibboost_python311-vc143-mt-gd-x64-1_81 -llibboost_numpy311-vc143-mt-gd-x64-1_81

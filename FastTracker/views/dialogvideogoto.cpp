@@ -21,3 +21,18 @@ void DialogVideoGoto::setFrame(int frame)
     _pos.setFrame(frame);
 
 }
+
+void DialogVideoGoto::setTime(double t)
+{
+
+}
+
+void DialogVideoGoto::setStep(int step)
+{
+
+}
+
+int DialogVideoGoto::getGotoPara(mtypes::VideoPos *pos)
+{
+    return 0;
+}
