@@ -1,7 +1,6 @@
 #ifndef TOMASCOMMANDLINETOOLS_H
 #define TOMASCOMMANDLINETOOLS_H
 
-#include "TomasCommandLineTools_global.h"
 #include <QObject>
 #include <QProcess>
 #include <QString>
@@ -10,7 +9,7 @@
 namespace tsh {
 
 
-class TOMASCOMMANDLINETOOLS_EXPORT TomasCommandLineTools:public QObject
+class TomasCommandLineTools:public QObject
 {
     Q_OBJECT
 public:
@@ -20,21 +19,18 @@ public:
     QProcess            *p;
 
     //method
-    Q_INVOKABLE void            system(QString s);
-    Q_INVOKABLE QString         getSaveFileName(QString title,QString dir,QString filter);
-    Q_INVOKABLE QString         getOpenFileName(QString title,QString dir,QString filter);
-    Q_INVOKABLE QString         getFolderFromFilePath(QString path);
-    Q_INVOKABLE QString         getExistingFolder(QString title,QString dir);
-    Q_INVOKABLE QString         getNewNameByTime(QString dic,QString tail);
-    Q_INVOKABLE QString         getDirByFilePaht(QString filepath);
-    Q_INVOKABLE void            openFile(QString file);
+    void            system(QString s);
+    QString         getSaveFileName(QString title,QString dir,QString filter);
+    QString         getOpenFileName(QString title,QString dir,QString filter);
+    QString         getFolderFromFilePath(QString path);
+    QString         getExistingFolder(QString title,QString dir);
+    QString         getNewNameByTime(QString dic,QString tail);
+    QString         getDirByFilePaht(QString filepath);
+    void            openFile(QString file);
 
 signals:
 
-
 };
-
-
 
 }// end namespace
 #endif // TOMASCOMMANDLINETOOLS_H

@@ -1,29 +1,65 @@
 cmake_minimum_required(VERSION 3.16)
 
 set(name FastTracker)
+project(${name} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
-
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.6.1/msvc2019_64")
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOMOC ON)
 
-list(APPEND CMAKE_PREFIX_PATH "C:/Users/tomaswu/myprograms/opencv/build")
+include_directories(srcs)
 
-include_directories("c:/Users/tomaswu/myprograms/opencv/build/include")
+cmake_host_system_information(RESULT host_name QUERY HOSTNAME)
+message("host name is:" ${host_name})
+if (${host_name} STREQUAL "mac-win")
+    list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.6.1/msvc2019_64")
+    list(APPEND CMAKE_PREFIX_PATH "C:/Users/tomaswu/myprograms/opencv/build")
+    include_directories("c:/Users/tomaswu/myprograms/opencv/build/include")
+else()
+    list(APPEND CMAKE_PREFIX_PATH "C:/Qt6/6.6.1/msvc2019_64")
+    list(APPEND CMAKE_PREFIX_PATH "D:/data/third_libs/opencv/opencv460/opencv/build/x64/vc15/lib")
+    list(APPEND CMAKE_PREFIX_PATH "D:/data/third_libs/boost_py312_184")
+    
+endif()
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
-find_package(opencv)
+find_package(Qt6 6.6 REQUIRED COMPONENTS Core Gui Widgets Charts)
+find_package(OpenCV)
+# find_package(Boost REQUIRED COMPONENTS python)
 
-file(GLOB srcs "views/*.h" "views/*.cpp" "views/*.ui"
-                "video/*.h" "video/*.cpp"
-                "utils/*.h" "utils/*cpp"
-                "TomasCommandLineTools/*.h" "TomasCommandLineTools/*.cpp"
-                "srcs/*.h" "srcs/*.cpp"
+include_directories(${OpenCV_INCLUDE_DIRS})
+message(${OpenCV_LIBRARIES})
+
+file(GLOB srcs 
+        "srcs/views/*.h"
+        "srcs/views/*.cpp"
+        "srcs/views/*.ui"
+        "srcs/video/*.h"
+        "srcs/video/*.cpp"
+        "srcs/utils/*.h"
+        "srcs/utils/*cpp"
+        "srcs/TomasCommandLineTools/*.h"
+        "srcs/TomasCommandLineTools/*.cpp"
+        "srcs/*.h"
+        "srcs/*.cpp"
+        "resources/*.qrc"
                 )
+
+qt_standard_project_setup()
 
 qt_add_executable(${name} ${srcs})
 
-target_link_libraries(${name} PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets opencv_world460)
+target_link_libraries(${name} PRIVATE 
+                        Qt6::Core
+                        Qt6::Gui
+                        Qt6::Widgets
+                        Qt6::Charts
+                        ${OpenCV_LIBRARIES}
+                        )
 
-set_property(TARGET ${name} PROPERTY WIN32_EXECUTABLE false)
+# if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set_property(TARGET ${name} PROPERTY WIN32_EXECUTABLE false)
+# endif()
