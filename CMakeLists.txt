@@ -19,21 +19,27 @@ if (${host_name} STREQUAL "mac-win")
     list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.6.1/msvc2019_64")
     list(APPEND CMAKE_PREFIX_PATH "C:/Users/tomaswu/myprograms/opencv/build")
     include_directories("c:/Users/tomaswu/myprograms/opencv/build/include")
+elseif(${host_name} STREQUAL "TomasdeMacBook-Pro.local")
+    list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/usr/op455/lib/cmake/opencv4)
+    list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/Qt/6.6.2/macos/lib/cmake)
+    list(APPEND CMAKE_PREFIX_PATH "~/miniconda3/envs/py311/lib/python3.11/site-packages/pybind11/share/cmake/pybind11")
+    set(QT_DIR /Users/tomaswu/Qt/6.6.2/macos)
+
 else()
-    list(APPEND CMAKE_PREFIX_PATH "C:/Qt6/6.6.1/msvc2019_64")
-    list(APPEND CMAKE_PREFIX_PATH "D:/data/third_libs/opencv/opencv460/opencv/build/x64/vc15/lib")
-    list(APPEND CMAKE_PREFIX_PATH "D:/data/third_libs/boost_py312_184")
+
+
     
 endif()
 
 find_package(Qt6 6.6 REQUIRED COMPONENTS Core Gui Widgets Charts)
 find_package(OpenCV)
-# find_package(Boost REQUIRED COMPONENTS python)
+find_package(pybind11 REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
+include_directories(${Qt6_INCLUDE_DIRS})
 message(${OpenCV_LIBRARIES})
 
-file(GLOB srcs 
+file(GLOB srcs  
         "srcs/views/*.h"
         "srcs/views/*.cpp"
         "srcs/views/*.ui"
@@ -58,8 +64,9 @@ target_link_libraries(${name} PRIVATE
                         Qt6::Widgets
                         Qt6::Charts
                         ${OpenCV_LIBRARIES}
+                        pybind11::embed
                         )
 
-# if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set_property(TARGET ${name} PROPERTY WIN32_EXECUTABLE false)
-# endif()
+endif()
