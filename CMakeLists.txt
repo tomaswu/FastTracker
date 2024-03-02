@@ -19,23 +19,25 @@ if (${host_name} STREQUAL "TOMASWUFAA0") # mac-win
     list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.6.1/msvc2019_64")
     list(APPEND CMAKE_PREFIX_PATH "C:/Users/tomaswu/myprograms/opencv/build")
     list(APPEND CMAKE_PREFIX_PATH "C:/Users/tomaswu/miniconda3/envs/py311/Lib/site-packages/pybind11/share/cmake/pybind11")
-    
 elseif(${host_name} STREQUAL "TomasdeMacBook-Pro.local") #mac
     list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/usr/op455/lib/cmake/opencv4)
-    list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/Qt/6.6.2/macos/lib/cmake)
-    list(APPEND CMAKE_PREFIX_PATH "~/miniconda3/envs/py311/lib/python3.11/site-packages/pybind11/share/cmake/pybind11")
-    set(QT_DIR /Users/tomaswu/Qt/6.6.2/macos)
+    # list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/Qt/6.6.2/macos/lib/cmake)
+    list(APPEND CMAKE_PREFIX_PATH "/Users/tomaswu/miniconda3/envs/py311/lib/python3.11/site-packages/pybind11/share/cmake/pybind11")
+    list(APPEND CMAKE_PREFIX_PATH "/Users/tomaswu/miniconda3/envs/py311")
+    set(Qt6_DIR /Users/tomaswu/Qt/6.6.2/macos/lib/cmake/Qt6)
+    include_directories(/Users/tomaswu/Qt/6.6.2/macos/lib/QtWidgets.framework/Versions/A/Headers)
 else() # win
 
 endif()
 
 find_package(Qt6 6.6 REQUIRED COMPONENTS Core Gui Widgets Charts)
 find_package(OpenCV)
+find_package(Python 3.11 COMPONENTS Interpreter Development REQUIRED)
+set(PYBIND11_PYTHON_VERSION 3.11)
 find_package(pybind11 REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${Qt6_INCLUDE_DIRS})
-message(${OpenCV_LIBRARIES})
 
 file(GLOB srcs  
         "srcs/views/*.h"
