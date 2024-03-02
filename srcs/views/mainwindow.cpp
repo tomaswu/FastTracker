@@ -36,6 +36,7 @@ void MainWindow::import_video(){
     }
 }
 
+
 void MainWindow::new_tag()
 {
     TabForm *tmp = new TabForm();

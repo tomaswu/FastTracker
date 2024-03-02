@@ -15,20 +15,18 @@ include_directories(srcs)
 
 cmake_host_system_information(RESULT host_name QUERY HOSTNAME)
 message("host name is:" ${host_name})
-if (${host_name} STREQUAL "mac-win")
+if (${host_name} STREQUAL "TOMASWUFAA0") # mac-win
     list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.6.1/msvc2019_64")
     list(APPEND CMAKE_PREFIX_PATH "C:/Users/tomaswu/myprograms/opencv/build")
-    include_directories("c:/Users/tomaswu/myprograms/opencv/build/include")
-elseif(${host_name} STREQUAL "TomasdeMacBook-Pro.local")
+    list(APPEND CMAKE_PREFIX_PATH "C:/Users/tomaswu/miniconda3/envs/py311/Lib/site-packages/pybind11/share/cmake/pybind11")
+    
+elseif(${host_name} STREQUAL "TomasdeMacBook-Pro.local") #mac
     list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/usr/op455/lib/cmake/opencv4)
     list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/Qt/6.6.2/macos/lib/cmake)
     list(APPEND CMAKE_PREFIX_PATH "~/miniconda3/envs/py311/lib/python3.11/site-packages/pybind11/share/cmake/pybind11")
     set(QT_DIR /Users/tomaswu/Qt/6.6.2/macos)
+else() # win
 
-else()
-
-
-    
 endif()
 
 find_package(Qt6 6.6 REQUIRED COMPONENTS Core Gui Widgets Charts)
