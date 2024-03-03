@@ -30,9 +30,11 @@ if (${host_name} STREQUAL "TOMASWUFAA0") # mac-win
     
 elseif(${host_name} STREQUAL "TomasdeMacBook-Pro.local") #mac
     list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/usr/op455/lib/cmake/opencv4)
-    list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/Qt/6.6.2/macos/lib/cmake)
-    list(APPEND CMAKE_PREFIX_PATH "~/miniconda3/envs/py311/lib/python3.11/site-packages/pybind11/share/cmake/pybind11")
-    set(QT_DIR /Users/tomaswu/Qt/6.6.2/macos)
+    # list(APPEND CMAKE_PREFIX_PATH /Users/tomaswu/Qt/6.6.2/macos/lib/cmake)
+    list(APPEND CMAKE_PREFIX_PATH "/Users/tomaswu/miniconda3/envs/py311/lib/python3.11/site-packages/pybind11/share/cmake/pybind11")
+    list(APPEND CMAKE_PREFIX_PATH "/Users/tomaswu/miniconda3/envs/py311")
+    set(Qt6_DIR /Users/tomaswu/Qt/6.6.2/macos/lib/cmake/Qt6)
+    include_directories(/Users/tomaswu/Qt/6.6.2/macos/lib/QtWidgets.framework/Versions/A/Headers)
 else() # win
 
 endif()
