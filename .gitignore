@@ -74,4 +74,6 @@ CMakeLists.txt.user*
 
 # vscode
 .vscode/
+.vs/
+out/
 
